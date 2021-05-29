@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "httf://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" >
+<h:head>
+		
+</h:head>
+
+<h:body>
+	<h:form id="formPackageForm">
+		<h:panelGrid columns="2" id="p1" border="1">
+			<f:facet name="header">
+				<h:outputText value="Form Package-Simple" class="formTitle"/>
+			</f:facet>
+			<h:selectOneMenu id="cboPack" value="#{formPackages.packageId}">
+				<f:selectItems id="s1" var="item" value="#{formPackages.packages}"
+					itemLabel="#{item.sender.name}" itemValue="#{item.packageID}" />
+				<f:ajax render="package_ID package_sender package_recipient package_weight" />
+			</h:selectOneMenu>
+			<h:panelGrid border="1" columns="2" id="p2">
+				<h:commandButton id="cmdPrevious" value="Previous"
+					actionListener="#{formPackages.previousPackage}" />
+				<h:commandButton id="cmdNext" value="Next"
+					actionListener="#{formPackages.nextPackage}" />
+			</h:panelGrid>
+			<h:outputText value="Package ID: " />
+			<h:inputText id="package_ID" value="#{formPackages.pack.packageID}" />
+			<h:outputText value="Recipient name: " />
+			<h:inputText id="package_recipient"
+				value="#{formPackages.pack.recipient.name}" />
+			<h:outputText value="Sender name: " />
+			<h:inputText id="package_sender"
+				value="#{formPackages.pack.sender.name}" />
+			<h:outputText value="Package weight: " />
+			<h:inputText id="package_weight" value="#{formPackages.pack.weight}" />
+			<h:panelGrid border="1" columns="2" id="p3">
+				<h:commandButton id="cmdAdaugare" value="Add"
+					actionListener="#{formPackages.addPackage}" />
+				<h:commandButton id="cmdDelete" value="Remove"
+					actionListener="#{formPackages.removePackage}" />
+			</h:panelGrid>
+			<h:panelGrid border="1" columns="2" id="p4">
+				<h:commandButton id="cmdAbandon" value="Leave"
+					actionListener="#{formPackages.leaveTransactionPackage}" />
+				<h:commandButton id="cmdSalvare" value="Save"
+					actionListener="#{formPackages.savePackage}" />
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "httf://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<body>
+	<div
+		style="width: 100%; font-size: 36px; line-height: 48px; background-color: navy; color: white">My
+		Facelet Application</div>
+	<h:form id="formCouriersForm">
+		<h:panelGrid columns="2" border="1" id="panouFormMaster">
+			<f:facet name="header">
+				<h:outputText value="Couriers FORM"></h:outputText>
+			</f:facet>
+			<h:selectOneMenu id="cboCouriers" value="#{formCourier.courierId}">
+				<f:selectItems value="#{formCourier.couriers}" var="item"
+					itemLabel="#{item.courierID}" itemValue="#{item.courierID}" />
+				<f:ajax render="@form" />
+			</h:selectOneMenu>
+			<h:panelGrid columns="2" border="1">
+				<h:commandButton id="btnPrevious"
+					actionListener="#{formCourier.previousCourier}" value="Previous">
+					<f:ajax render="@form" />
+				</h:commandButton>
+				<h:commandButton id="cmdNext"
+					actionListener="#{formCourier.nextCourier}" value="Next">
+					<f:ajax render="@form" />
+				</h:commandButton>
+			</h:panelGrid>
+			<h:outputText value="Courier ID: " />
+			<h:inputText id="courier_ID" value="#{formCourier.courier.courierID}" />
+			<h:outputText value="Department allocated: " />
+			<h:inputText id="departament_name"
+				value="#{formCourier.courier.departamentName}" />
+			<h:outputText value="Courier location: " />
+			<h:inputText id="courier_location"
+				value="#{formCourier.courier.location}" />
+
+			<h:panelGrid columns="2" border="1">
+				<h:commandButton id="cmdAdaugare" value="Add"
+					actionListener="#{formCourier.addCourier}" />
+				<h:commandButton id="cmdStergere" value="Remove"
+					actionListener="#{formCourier.removeCourier}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" border="1">
+				<h:commandButton id="cmdAbandon"
+					actionListener="#{formCourier.leave}" value="Leave" />
+				<h:commandButton id="cmdSalvare"
+					actionListener="#{formCourier.saveCourier}" value="Save" />
+			</h:panelGrid>
+		</h:panelGrid>
+	</h:form>
+	
+	<h:form id="formCourierForm">
+		<h:panelGrid columns="2" border="1" id="panouFormMaster"></h:panelGrid>
+		<h:dataTable id="packagesGrid" border="1"
+			value="#{formCourier.deliveryDataModel}" var="delivery">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="AWB" />
+				</f:facet>
+				<h:outputText id="awb" value="#{delivery.deliveryAWB}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Package" />
+				</f:facet>
+				<h:selectOneMenu id="cboPackage" value="#{formCourier.packageId}">
+					<f:selectItems value="#{formCourier.packages}" var="item"
+						itemValue="#{item.packageID}" itemLabel="#{item.packageID}" />
+				</h:selectOneMenu>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Weight" />
+				</f:facet>
+				<h:outputText id="packageWeight" value="#{delivery.pack.weight}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Value" />
+				</f:facet>
+				<h:outputText id="deliveryValue" value="#{delivery.value}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Remove" />
+				</f:facet>
+				<h:commandButton id="cmdStergeArticol" value="Remove"
+					actionListener="#{formCourier.removeCourier}">
+					<f:ajax render="packagesGrid" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:commandButton id="cmdAdaugaArticol" value="Add package"
+			actionListener="#{formCourier.addPackage}" />
+
+	</h:form>
+
+</body>
+</html>

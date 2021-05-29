@@ -1,0 +1,23 @@
+.formTitle{
+	font-size:17px;
+	color:#fff;
+	text-decoration:none;
+	font-style:bold;
+	text-transform:uppercase;
+}
+
+#cboPack{
+	margin-right:15px;	
+}
+
+td{
+	font-size:15px;
+	color:#fff;
+	font-weight:normal;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+body{
+	background-color:#171717;
+}
